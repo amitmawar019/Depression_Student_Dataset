@@ -135,7 +135,6 @@ SET Depression = 'NO'
 WHERE Depression = '0';
 
 
-
 📊 Tableau Dashboard
 
 The cleaned dataset was connected to Tableau to create an interactive dashboard.
