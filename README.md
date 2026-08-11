@@ -136,7 +136,7 @@ WHERE Depression = '0';
 
 SET Depression = 'YES'
 WHERE Depression = '1';
-```sql
+```
 
 
 📊 Tableau Dashboard
