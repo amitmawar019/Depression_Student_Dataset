@@ -44,11 +44,11 @@ The raw dataset was processed using SQL Server.
 
 --The raw dataset was processed and transformed using **SQL Server** before being connected to Tableau. The following steps were performed to prepare the dataset for analysis and visualization.
 
+```sql
 --## 1. Database Creation
 
 --A dedicated SQL database was created for the project.
 
-```sql
 CREATE DATABASE [Tableau Project 1];
 
 USE [Tableau Project 1];
@@ -134,11 +134,11 @@ UPDATE [dbo].[Depression+Student+Dataset]
 SET Depression = 'NO'
 WHERE Depression = '0';
 
+SET Depression = 'YES'
+WHERE Depression = '1';
+```sql
 
 
-
-
-####
 📊 Tableau Dashboard
 
 The cleaned dataset was connected to Tableau to create an interactive dashboard.
@@ -190,7 +190,3 @@ Distribution of academic pressure levels.
 Variation in financial stress levels.
 Relationship between student lifestyle and depression-related outcomes.
 Potential patterns involving family history and depression.
-UPDATE [dbo].[Depression+Student+Dataset]
-SET Depression = 'YES'
-WHERE Depression = '1';
-
