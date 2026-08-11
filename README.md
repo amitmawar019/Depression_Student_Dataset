@@ -40,23 +40,27 @@ The dataset contains information about students and several factors that may be 
 - Original Features: 11
 
 The raw dataset was processed using SQL Server.
+# 🧹 Data Cleaning & Transformation
 
-1. Database Creation
+The raw dataset was processed and transformed using **SQL Server** before being connected to Tableau. The following steps were performed to prepare the dataset for analysis and visualization.
+
+## 1. Database Creation
 
 A dedicated SQL database was created for the project.
+
+```sql
 CREATE DATABASE [Tableau Project 1];
 
 USE [Tableau Project 1];
-
 2. Data Exploration
 
-The complete dataset was initially inspected using:
+The complete dataset was initially inspected to understand its structure, columns, and available records.
 
 SELECT *
 FROM [dbo].[Depression+Student+Dataset];
 3. Gender Standardization
 
-Gender values were standardized:
+Gender values were standardized to maintain consistent categorical values. Female was converted to F, while male was converted to M.
 
 UPDATE [dbo].[Depression+Student+Dataset]
 SET Gender = 'F'
@@ -67,13 +71,16 @@ SET Gender = 'M'
 WHERE Gender = 'male';
 4. Age Group Creation
 
-A derived Age_Group column was created:
+A new derived column, Age_Group, was created to categorize students into different age ranges.
 
 ALTER TABLE [dbo].[Depression+Student+Dataset]
 ADD Age_Group VARCHAR(MAX);
 
-Age groups were then created using conditional logic:
+The age groups were assigned using conditional logic:
 
+A1: 18–24 years
+A2: 25–30 years
+A3: Other age groups
 UPDATE [dbo].[Depression+Student+Dataset]
 SET Age_Group =
 CASE
@@ -83,35 +90,46 @@ CASE
 END;
 5. Data Distribution Analysis
 
-SQL GROUP BY queries were used to analyze:
+SQL GROUP BY queries were used to understand the distribution of students across important categorical and numerical variables, including:
 
 Academic Pressure
 Study Satisfaction
 Sleep Duration
 Dietary Habits
+Suicidal Thoughts
 Study Hours
 Financial Stress
 Family History of Mental Illness
 Depression
 Age Groups
 
-Example:
+For example, Academic Pressure was analyzed using:
 
-SELECT Academic_Pressure, COUNT(*)
+SELECT Academic_Pressure, COUNT(*) AS Student_Count
 FROM [dbo].[Depression+Student+Dataset]
 GROUP BY Academic_Pressure;
-6. Index Column
 
-An identity-based index column was added for record identification:
+Similar aggregation queries were performed for the other variables to support exploratory data analysis.
+
+6. Index Column Creation
+
+An identity-based Index_Column was added to provide a unique sequential identifier for each record.
 
 ALTER TABLE [dbo].[Depression+Student+Dataset]
 ADD Index_Column INT IDENTITY(1,1);
 7. Depression Category Standardization
 
-Depression values were transformed into readable categories.
+The Depression column was converted from its original numeric representation into a readable categorical format.
+
+First, the column data type was changed to VARCHAR:
 
 ALTER TABLE [dbo].[Depression+Student+Dataset]
 ALTER COLUMN Depression VARCHAR(MAX);
+
+The values were then converted as follows:
+
+0 → NO
+1 → YES
 UPDATE [dbo].[Depression+Student+Dataset]
 SET Depression = 'NO'
 WHERE Depression = '0';
@@ -119,6 +137,7 @@ WHERE Depression = '0';
 UPDATE [dbo].[Depression+Student+Dataset]
 SET Depression = 'YES'
 WHERE Depression = '1';
+
 📊 Tableau Dashboard
 
 The cleaned dataset was connected to Tableau to create an interactive dashboard.
