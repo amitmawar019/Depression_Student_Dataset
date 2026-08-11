@@ -44,10 +44,10 @@ The raw dataset was processed using SQL Server.
 1. Database Creation
 
 A dedicated SQL database was created for the project.
-
 CREATE DATABASE [Tableau Project 1];
 
 USE [Tableau Project 1];
+
 2. Data Exploration
 
 The complete dataset was initially inspected using:
